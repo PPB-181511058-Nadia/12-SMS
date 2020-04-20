@@ -44,5 +44,4 @@ public class SMSReceiver extends BroadcastReceiver {
             //---stop the SMS message from being broadcasted---
             //this.abortBroadcast();
         }
-    }
 }
