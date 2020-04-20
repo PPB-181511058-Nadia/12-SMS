@@ -17,26 +17,24 @@ public class SMSReceiver extends BroadcastReceiver {
         SmsMessage[] msgs = null;
         String str = "SMS from ";
         if (bundle != null) {
-//            //---retrieve the SMS message received---
-//            msgs = Telephony.Sms.Intents.getMessagesFromIntent(intent);
-//            for (int i=0; i<msgs.length; i++){
-//                str += msgs[i].getMessageBody().toString();
-//            }
-//            //---get the message body---
-//             str += msgs[i].getMessageBody().toString();
-
             //---retrieve the SMS message received---
-            Object[] pdus = (Object[]) bundle.get("pdus");
-            msgs = new SmsMessage[pdus.length];
-            for (int i = 0; i < msgs.length; i++) {
-                msgs[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
-                if (i == 0) {
-                    //---get the sender address/phone number---
-                    str += msgs[i].getOriginatingAddress();
-                    str += ": ";
-                }
-                //---get the message body---
+            msgs = Telephony.Sms.Intents.getMessagesFromIntent(intent);
+            for (int i=0; i<msgs.length; i++){
                 str += msgs[i].getMessageBody().toString();
+            }
+
+//            //---retrieve the SMS message received---
+//            Object[] pdus = (Object[]) bundle.get("pdus");
+//            msgs = new SmsMessage[pdus.length];
+//            for (int i = 0; i < msgs.length; i++) {
+//                msgs[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
+//                if (i == 0) {
+//                    //---get the sender address/phone number---
+//                    str += msgs[i].getOriginatingAddress();
+//                    str += ": ";
+//                }
+//                //---get the message body---
+//                str += msgs[i].getMessageBody().toString();
             }
 
             //---display the new SMS message---
@@ -44,7 +42,7 @@ public class SMSReceiver extends BroadcastReceiver {
             Log.d("SMSReceiver", str);
 
             //---stop the SMS message from being broadcasted---
-            this.abortBroadcast();
+            //this.abortBroadcast();
         }
     }
 }

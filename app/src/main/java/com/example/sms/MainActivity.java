@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     final private int REQUEST_SEND_SMS = 123;
+    final private int REQUEST_RECEIVE_SMS = 321;
+    //SMSReceiver smsReceiver
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,14 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.SEND_SMS},
                     REQUEST_SEND_SMS);
+        }
+
+        if(ContextCompat.checkSelfPermission(this,
+                Manifest.permission.RECEIVE_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[] {Manifest.permission.RECEIVE_SMS},
+                    REQUEST_RECEIVE_SMS);
         }
     }
     @Override
@@ -44,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick(View v) {
         //---the "phone number" of your emulator should be 5554---
-        sendSMS("5554", "Hello my friends!");
+        sendSMS("0895320440939", "Hello my friends!");
     }
 
     //---sends an SMS message---
